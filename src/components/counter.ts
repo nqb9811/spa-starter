@@ -5,8 +5,8 @@ export class Counter extends Component {
   protected btn: HTMLButtonElement;
   protected counter: ComponentState<number>;
 
-  constructor(parent: HTMLElement) {
-    super('app-counter', parent);
+  constructor(parentElement: HTMLElement) {
+    super('app-counter', parentElement);
 
     this.btn = this.createElement('button', this.element);
 

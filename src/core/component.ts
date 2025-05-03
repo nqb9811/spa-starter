@@ -16,12 +16,12 @@ export class Component {
     Map<string, (...args: any[]) => void>
   >();
 
-  constructor(selector: string, parent: HTMLElement) {
+  constructor(tagName: string, parentElement: HTMLElement) {
     // Create component wrapper element
-    this.element = document.createElement(selector);
+    this.element = document.createElement(tagName);
 
     // Attach component element to the DOM
-    parent.appendChild(this.element);
+    parentElement.appendChild(this.element);
 
     // Store component in global registry for later lookup by element
     // Must remove when component is destroyed
@@ -147,6 +147,15 @@ export class Component {
     return false;
   }
 
+  protected createElement<K extends keyof HTMLElementTagNameMap>(
+    tagName: K,
+    parentElement: HTMLElement,
+  ): HTMLElementTagNameMap[K] {
+    const element = document.createElement(tagName);
+    parentElement.appendChild(element);
+    return element;
+  }
+
   protected createState<T>(
     initialValue: T,
     onChange: () => void,
@@ -199,14 +208,5 @@ export class Component {
     }
 
     return new Proxy(state, handler);
-  }
-
-  protected createElement<K extends keyof HTMLElementTagNameMap>(
-    tagName: K,
-    parent: HTMLElement,
-  ): HTMLElementTagNameMap[K] {
-    const element = document.createElement(tagName);
-    parent.appendChild(element);
-    return element;
   }
 }
