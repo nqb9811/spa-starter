@@ -204,7 +204,7 @@ export class Component {
     };
 
     if (invokeOnChangeOnInit) {
-      onChange();
+      setTimeout(() => onChange()); // state not initialized yet within this method
     }
 
     return new Proxy(state, handler);

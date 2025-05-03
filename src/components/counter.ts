@@ -8,8 +8,10 @@ export class Counter extends Component {
   constructor(parentElement: HTMLElement) {
     super('app-counter', parentElement);
 
+    // Template
     this.btn = this.createElement('button', this.element);
 
+    // State
     this.counter = this.createState<number>(
       0,
       () => {
@@ -18,6 +20,7 @@ export class Counter extends Component {
       true,
     );
 
+    // Event
     this.btn.addEventListener('click', () => {
       this.counter.value++;
     });
