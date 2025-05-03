@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "prettier": "^3.5.3",
+    "sass": "^1.87.0",
     "typescript": "~5.7.2",
     "vite": "^6.3.1"
   },
