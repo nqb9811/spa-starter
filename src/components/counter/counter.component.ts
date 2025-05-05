@@ -1,7 +1,7 @@
 import { Component, ComponentState } from '../../core/component';
-import './counter.scss';
+import './counter.component.scss';
 
-export class Counter extends Component {
+export class CounterComponent extends Component {
   protected btn: HTMLButtonElement;
   protected counter: ComponentState<number>;
 

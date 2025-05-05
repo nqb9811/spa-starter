@@ -1,7 +1,7 @@
 import { Component } from '../../core/component';
-import './spinner.scss';
+import './spinner.component.scss';
 
-export class Spinner extends Component {
+export class SpinnerComponent extends Component {
   protected spinner: HTMLDivElement;
 
   constructor(parent: HTMLElement) {

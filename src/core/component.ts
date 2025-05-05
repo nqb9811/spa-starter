@@ -7,14 +7,11 @@ export type ComponentState<T> = {
 export class Component {
   protected element: HTMLElement;
 
-  protected parentComponent: Component | null = null;
+  private parentComponent: Component | null = null;
 
-  protected childComponents = new Map<HTMLElement, Component>();
+  private childComponents = new Map<HTMLElement, Component>();
 
-  protected listeners = new Map<
-    HTMLElement,
-    Map<string, (...args: any[]) => void>
-  >();
+  private debounces = new Map<string, ReturnType<typeof setTimeout>>();
 
   constructor(tagName: string, parent: HTMLElement) {
     // Create component wrapper element
@@ -52,13 +49,6 @@ export class Component {
 
     // Remove component from parent component's children
     this.parentComponent?.childComponents.delete(this.element);
-
-    // Remove event listeners
-    for (const [element, listeners] of this.listeners) {
-      for (const [event, callback] of listeners) {
-        element.removeEventListener(event, callback);
-      }
-    }
   }
 
   public getAncestorComponent(selector: string): Component | null {
@@ -159,7 +149,7 @@ export class Component {
   protected createState<T>(
     initialValue: T,
     onChange: () => void,
-    invokeOnChangeOnInit = false,
+    invokeOnChangeOnInit = true,
   ): ComponentState<T> {
     const state = {
       value: initialValue,
@@ -208,5 +198,16 @@ export class Component {
     }
 
     return new Proxy(state, handler);
+  }
+
+  public debounceProcess(key: string, callback: () => void, ms: number) {
+    clearTimeout(this.debounces.get(key));
+    this.debounces.set(
+      key,
+      setTimeout(() => {
+        callback();
+        this.debounces.delete(key);
+      }, ms),
+    );
   }
 }
