@@ -1,17 +1,18 @@
-import { Component, ComponentState } from '../core/component';
+import { Component, ComponentState } from '../../core/component';
 import './counter.scss';
 
 export class Counter extends Component {
   protected btn: HTMLButtonElement;
   protected counter: ComponentState<number>;
 
-  constructor(parentElement: HTMLElement) {
-    super('app-counter', parentElement);
+  constructor(parent: HTMLElement) {
+    super('app-counter', parent);
 
-    // Template
     this.btn = this.createElement('button', this.element);
+    this.btn.addEventListener('click', () => {
+      this.counter.value++;
+    });
 
-    // State
     this.counter = this.createState<number>(
       0,
       () => {
@@ -19,10 +20,5 @@ export class Counter extends Component {
       },
       true,
     );
-
-    // Event
-    this.btn.addEventListener('click', () => {
-      this.counter.value++;
-    });
   }
 }

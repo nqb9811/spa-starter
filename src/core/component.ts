@@ -16,12 +16,12 @@ export class Component {
     Map<string, (...args: any[]) => void>
   >();
 
-  constructor(tagName: string, parentElement: HTMLElement) {
+  constructor(tagName: string, parent: HTMLElement) {
     // Create component wrapper element
     this.element = document.createElement(tagName);
 
     // Attach component element to the DOM
-    parentElement.appendChild(this.element);
+    parent.appendChild(this.element);
 
     // Store component in global registry for later lookup by element
     // Must remove when component is destroyed
@@ -149,10 +149,10 @@ export class Component {
 
   protected createElement<K extends keyof HTMLElementTagNameMap>(
     tagName: K,
-    parentElement: HTMLElement,
+    parent: HTMLElement,
   ): HTMLElementTagNameMap[K] {
     const element = document.createElement(tagName);
-    parentElement.appendChild(element);
+    parent.appendChild(element);
     return element;
   }
 
