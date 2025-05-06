@@ -1,4 +1,3 @@
-import { CounterComponent } from './components/counter/counter.component';
 import { SelectComponent } from './components/select/select.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
@@ -8,9 +7,6 @@ root.style.height = '300px';
 // root.style.position = 'absolute';
 // root.style.top = '100px';
 // root.style.left = '100px';
-
-const counter = new CounterComponent(root);
-console.log(counter);
 
 const spinner = new SpinnerComponent(root);
 console.log(spinner);
@@ -24,3 +20,10 @@ const select = new SelectComponent(root, {
   ],
 });
 console.log(select);
+// select.addOptions([
+//   { id: '3', text: 'Three' },
+//   { id: '4', text: 'Four' },
+//   { id: '5', text: 'Five' },
+// ]);
+// select.setSelected(null);
+// select.setSelected('2');

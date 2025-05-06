@@ -139,10 +139,14 @@ export class Component {
 
   protected createElement<K extends keyof HTMLElementTagNameMap>(
     tagName: K,
-    parent: HTMLElement,
+    parent?: HTMLElement,
   ): HTMLElementTagNameMap[K] {
     const element = document.createElement(tagName);
-    parent.appendChild(element);
+
+    if (parent) {
+      parent.appendChild(element);
+    }
+
     return element;
   }
 
@@ -200,7 +204,7 @@ export class Component {
     return new Proxy(state, handler);
   }
 
-  public debounceProcess(key: string, callback: () => void, ms: number) {
+  protected debounceProcess(key: string, callback: () => void, ms: number) {
     clearTimeout(this.debounces.get(key));
     this.debounces.set(
       key,
